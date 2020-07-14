@@ -12,7 +12,7 @@ Example: apples, sugar, flour, cinnamon
 After entering a valid list of ingredients you will see the most highly rated recipe for your given 
 ingredients.
 
-```json
+```
 {'id': 801901,
  'image': 'https://spoonacular.com/recipeImages/801901-312x231.jpg',
  'imageType': 'jpg',
