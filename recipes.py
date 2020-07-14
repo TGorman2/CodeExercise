@@ -12,7 +12,12 @@ import base64
 def get_recipe(ingredientList):
     params = {"ingredients": ingredientList, "ranking": 1, "apiKey": base64.b64decode(constants.SPOON_KEY)}
     resp = requests.get(constants.SPOONACULAR_URL, params)
+    # TODO add retry logic and error handling
     recipes = resp.json()
+    # Check to see if the request returned any recipes
+    if (len(recipes)) == 0:
+        print("No recipes were found for the given list of ingredients: %s" % ingredientList)
+        return None
     recipes = sorted(recipes, key=lambda recipe: recipe['likes'], reverse=True)
     # Return the most popular recipe that uses all the provided ingredients
     return recipes[0]
@@ -24,6 +29,7 @@ def list_missing_ingredients(recipe):
     for i in range(len(recipe["missedIngredients"])):
         # Print of the simple name of the missing ingredients
         pprint.pprint(recipe["missedIngredients"][i]["originalName"])
+    print("-" * 20 + "\n")
 
 
 # get_ingredients_from_user will prompt the user for ingredients and give them an example of how to enter them.
@@ -32,16 +38,20 @@ def get_ingredients_from_user():
     print("Example: apples, sugar, flour, cinnamon")
     userInput = input()
 
-    # Validate input function needed
+    # TODO add input validation function, regex
 
     # Get recipe
     recipe = get_recipe(userInput)
+    if recipe:  # Recipe was found
+        # List missing ingredients
+        list_missing_ingredients(recipe)
 
-    # List missing ingredients
-    list_missing_ingredients(recipe)
-
-    # print out full recipe
-    pprint.pprint(recipe)
+        # print out full recipe
+        pprint.pprint(recipe)
+    else:  # No recipe was found, most likely invalid input
+        print("Please try entering ingredients again:")
+        print("-" * 20 + "\n")
+        get_ingredients_from_user()
 
 
 def main():
