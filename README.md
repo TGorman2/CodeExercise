@@ -1,4 +1,4 @@
-# Recipe APi Code Exercise 
+# Recipe API Code Exercise 
 
 This application takes in a comma separated list of ingredients and returns the highest rated recipe that uses the 
 provided ingredients.
@@ -35,7 +35,7 @@ ingredients.
                         'amount': 4.0,
  ...
 ```
-If there was an issue with the ingredients passed in then you will be promoted to re-enter your ingredients.
+If there is an issue with the ingredients passed in then you will be prompted to re-enter your ingredients.
 
 ```
 No recipes were found for the given list of ingredients: 
