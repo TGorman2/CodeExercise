@@ -25,11 +25,12 @@ def get_recipe(ingredientList):
 
 # list_missing_ingredients prints out the all the ingredients the user is missing for the given recipe
 def list_missing_ingredients(recipe):
+    print("-" * 20 + "\n")
     print("These are the ingredients you are missing for this recipe:")
     for i in range(len(recipe["missedIngredients"])):
         # Print of the simple name of the missing ingredients
         pprint.pprint(recipe["missedIngredients"][i]["originalName"])
-    print("-" * 20 + "\n")
+
 
 
 # get_ingredients_from_user will prompt the user for ingredients and give them an example of how to enter them.
@@ -43,11 +44,11 @@ def get_ingredients_from_user():
     # Get recipe
     recipe = get_recipe(userInput)
     if recipe:  # Recipe was found
-        # List missing ingredients
-        list_missing_ingredients(recipe)
-
         # print out full recipe
         pprint.pprint(recipe)
+
+        # List missing ingredients
+        list_missing_ingredients(recipe)
     else:  # No recipe was found, most likely invalid input
         print("Please try entering ingredients again:")
         print("-" * 20 + "\n")
