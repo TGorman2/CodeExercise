@@ -27,19 +27,24 @@ def get_recipe(ingredientList):
 def list_missing_ingredients(recipe):
     print("-" * 20 + "\n")
     print("These are the ingredients you are missing for this recipe:")
-    for i in range(len(recipe["missedIngredients"])):
+    for i in (recipe["missedIngredients"]):
         # Print of the simple name of the missing ingredients
-        pprint.pprint(recipe["missedIngredients"][i]["originalName"])
+        pprint.pprint(i["originalName"])
 
+# get_user_input is a simple check to make sure some input was entered
+def get_user_input() -> str:
+    print("Please enter a comma separated list of the ingredients you have")
+    print("Example: apples, sugar, flour, cinnamon")
+    userInput = input()
+    if userInput == "":
+        print("No ingredients were entered. Please try again\n")
+        get_user_input()
+    return userInput
 
 
 # get_ingredients_from_user will prompt the user for ingredients and give them an example of how to enter them.
 def get_ingredients_from_user():
-    print("Please enter a comma separated list of the ingredients you have")
-    print("Example: apples, sugar, flour, cinnamon")
-    userInput = input()
-
-    # TODO add input validation function, regex
+    userInput = get_user_input()
 
     # Get recipe
     recipe = get_recipe(userInput)
